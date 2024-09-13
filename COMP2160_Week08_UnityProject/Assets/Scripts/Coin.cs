@@ -4,15 +4,31 @@ using UnityEngine;
 
 public class Coin : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    // Singleton
+    static private Coin instance;
+    static public Coin Instance 
     {
-        
+        get 
+        {
+            if (instance == null)
+            {
+                Debug.LogError("There is no Coin instance in the scene.");
+            }
+            return instance;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    void Awake() 
     {
-        
+        instance = this;
+    }
+
+    // Event handlers
+    public delegate void OnPickupEventHandler();
+    public event OnPickupEventHandler OnPickupEvent;
+
+    public void PickUp()
+    {
+        OnPickupEvent?.Invoke();
     }
 }
