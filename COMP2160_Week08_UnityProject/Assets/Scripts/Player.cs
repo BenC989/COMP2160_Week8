@@ -38,7 +38,7 @@ public class Player : MonoBehaviour
         verticalMovement = movementAction.ReadValue<Vector2>().y;
 
         // Move the player
-        transform.Translate(Vector3.forward * speed * verticalMovement * Time.deltaTime, Space.Self);
-        transform.Translate(Vector3.right * speed * horizontalMovement * Time.deltaTime, Space.Self);
+        transform.Translate(Vector3.forward * speed * verticalMovement * Time.deltaTime, Space.World);
+        transform.Translate(Vector3.right * speed * horizontalMovement * Time.deltaTime, Space.World);
     }
 }
