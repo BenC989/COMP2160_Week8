@@ -41,7 +41,7 @@ public class ScoreKeeper : MonoBehaviour
         coin = gameObject.GetComponent<Coin>();
 
         // Subscribe to OnPickupEvent
-        Coin.Instance.OnPickupEvent += OnPickup;
+        Coin.OnPickupEvent += OnPickup;
     }
 
     void OnPickup()
