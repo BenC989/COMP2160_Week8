@@ -28,9 +28,18 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             ""id"": ""2e10d707-86be-40c8-954e-23db3b5a1004"",
             ""actions"": [
                 {
-                    ""name"": ""move"",
+                    ""name"": ""player1move"",
                     ""type"": ""Value"",
                     ""id"": ""11a92309-f49b-40bf-add0-fcbdfd0a3bc6"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""player2move"",
+                    ""type"": ""Value"",
+                    ""id"": ""c0135249-9a77-49a6-aec9-d1b2ae62e530"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -45,7 +54,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""move"",
+                    ""action"": ""player1move"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
@@ -56,7 +65,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""move"",
+                    ""action"": ""player1move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -67,7 +76,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""move"",
+                    ""action"": ""player1move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -78,7 +87,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""move"",
+                    ""action"": ""player1move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -89,7 +98,62 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""move"",
+                    ""action"": ""player1move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""b16dd96f-b249-4e9b-b9cf-d56d866641b0"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""player2move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""0322176e-1279-4921-9767-030c04a1c8c0"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""player2move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""5fea1896-fe90-432e-b047-44a4b8c3de2d"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""player2move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""e92e9341-ac81-4d26-b27e-ab351b6524c1"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""player2move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""7f8e390a-7600-41dc-ba25-90d93b3c1bfd"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""player2move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 }
@@ -100,7 +164,8 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
 }");
         // movement
         m_movement = asset.FindActionMap("movement", throwIfNotFound: true);
-        m_movement_move = m_movement.FindAction("move", throwIfNotFound: true);
+        m_movement_player1move = m_movement.FindAction("player1move", throwIfNotFound: true);
+        m_movement_player2move = m_movement.FindAction("player2move", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -162,12 +227,14 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
     // movement
     private readonly InputActionMap m_movement;
     private List<IMovementActions> m_MovementActionsCallbackInterfaces = new List<IMovementActions>();
-    private readonly InputAction m_movement_move;
+    private readonly InputAction m_movement_player1move;
+    private readonly InputAction m_movement_player2move;
     public struct MovementActions
     {
         private @PlayerActions m_Wrapper;
         public MovementActions(@PlayerActions wrapper) { m_Wrapper = wrapper; }
-        public InputAction @move => m_Wrapper.m_movement_move;
+        public InputAction @player1move => m_Wrapper.m_movement_player1move;
+        public InputAction @player2move => m_Wrapper.m_movement_player2move;
         public InputActionMap Get() { return m_Wrapper.m_movement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -177,16 +244,22 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_MovementActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_MovementActionsCallbackInterfaces.Add(instance);
-            @move.started += instance.OnMove;
-            @move.performed += instance.OnMove;
-            @move.canceled += instance.OnMove;
+            @player1move.started += instance.OnPlayer1move;
+            @player1move.performed += instance.OnPlayer1move;
+            @player1move.canceled += instance.OnPlayer1move;
+            @player2move.started += instance.OnPlayer2move;
+            @player2move.performed += instance.OnPlayer2move;
+            @player2move.canceled += instance.OnPlayer2move;
         }
 
         private void UnregisterCallbacks(IMovementActions instance)
         {
-            @move.started -= instance.OnMove;
-            @move.performed -= instance.OnMove;
-            @move.canceled -= instance.OnMove;
+            @player1move.started -= instance.OnPlayer1move;
+            @player1move.performed -= instance.OnPlayer1move;
+            @player1move.canceled -= instance.OnPlayer1move;
+            @player2move.started -= instance.OnPlayer2move;
+            @player2move.performed -= instance.OnPlayer2move;
+            @player2move.canceled -= instance.OnPlayer2move;
         }
 
         public void RemoveCallbacks(IMovementActions instance)
@@ -206,6 +279,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
     public MovementActions @movement => new MovementActions(this);
     public interface IMovementActions
     {
-        void OnMove(InputAction.CallbackContext context);
+        void OnPlayer1move(InputAction.CallbackContext context);
+        void OnPlayer2move(InputAction.CallbackContext context);
     }
 }

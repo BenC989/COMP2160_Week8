@@ -5,12 +5,12 @@ using UnityEngine;
 public class Coin : MonoBehaviour
 {
     // Event handlers
-    public delegate void OnPickupEventHandler();
+    public delegate void OnPickupEventHandler(string player);
     public static event OnPickupEventHandler OnPickupEvent;
 
     void OnCollisionEnter(Collision collision)
     {
-        OnPickupEvent?.Invoke();
+        OnPickupEvent?.Invoke(collision.gameObject.name);
         Destroy(gameObject);
     }
 }

@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour
 {
     // Define UI text variables
     [SerializeField] private TextMeshProUGUI player1Score;
+    [SerializeField] private TextMeshProUGUI player2Score;
 
     // Define ScoreKeeper
     [SerializeField] private ScoreKeeper scoreKeeper;
@@ -15,6 +16,7 @@ public class UIManager : MonoBehaviour
     private void Update()
     {
         // Update the UI text
-        player1Score.text = "" + scoreKeeper.CurrentScore;
+        player1Score.text = "" + scoreKeeper.Player1Score;
+        player2Score.text = "" + scoreKeeper.Player2Score;
     }
 }

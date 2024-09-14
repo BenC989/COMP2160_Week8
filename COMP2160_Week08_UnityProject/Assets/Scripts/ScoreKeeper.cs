@@ -6,7 +6,8 @@ public class ScoreKeeper : MonoBehaviour
 {
     private Coin coin;
 
-    private int currentScore = 0;
+    private int player1Score = 0;
+    private int player2Score = 0;
 
     // Singleton
     static private ScoreKeeper instance;
@@ -44,18 +45,35 @@ public class ScoreKeeper : MonoBehaviour
         Coin.OnPickupEvent += OnPickup;
     }
 
-    void OnPickup()
+    void OnPickup(string player)
     {
-        currentScore += 10;
-        Debug.Log("Current Score: " + currentScore);
+        if (player == "Player1")
+        {
+            player1Score += 10;
+            Debug.Log("Player 1 Score: " + player1Score);
+        }
+        if (player == "Player2")
+        {
+            player2Score += 10;
+            Debug.Log("Player 2 Score: " + player2Score);
+        }
     }
 
-    // Getter for CurrentScore
-    public int CurrentScore
+    // Getter for Player1Score
+    public int Player1Score
     {
         get 
         {
-            return currentScore;
+            return player1Score;
+        }
+    }
+
+    // Getter for Player2Score
+    public int Player2Score
+    {
+        get 
+        {
+            return player2Score;
         }
     }
 }

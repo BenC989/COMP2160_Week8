@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Player : MonoBehaviour
+public class Player2 : MonoBehaviour
 {
     // Define input action variables
     private PlayerActions actions;
@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         actions = new PlayerActions();
-        movementAction = actions.movement.move;
+        movementAction = actions.movement.player2move;
     }
 
     private void OnEnable()
