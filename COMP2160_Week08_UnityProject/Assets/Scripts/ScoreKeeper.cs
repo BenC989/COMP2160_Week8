@@ -45,16 +45,16 @@ public class ScoreKeeper : MonoBehaviour
         Coin.OnPickupEvent += OnPickup;
     }
 
-    void OnPickup(string player)
+    void OnPickup(string player, int points)
     {
         if (player == "Player1")
         {
-            player1Score += 10;
+            player1Score += points;
             Debug.Log("Player 1 Score: " + player1Score);
         }
         if (player == "Player2")
         {
-            player2Score += 10;
+            player2Score += points;
             Debug.Log("Player 2 Score: " + player2Score);
         }
     }
