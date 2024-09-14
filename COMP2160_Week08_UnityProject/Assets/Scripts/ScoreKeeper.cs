@@ -49,4 +49,13 @@ public class ScoreKeeper : MonoBehaviour
         currentScore += 10;
         Debug.Log("Current Score: " + currentScore);
     }
+
+    // Getter for CurrentScore
+    public int CurrentScore
+    {
+        get 
+        {
+            return currentScore;
+        }
+    }
 }
